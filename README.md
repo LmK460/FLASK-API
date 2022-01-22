@@ -25,3 +25,6 @@ O HomeAssistent também deverá se comportar como um servidor para uma aplicaç�
 ![arquitetura do projeto](imagens/arquitetura.jpg)
 
 #Aplicação
+![app1](imagens/app2.jpeg)
+![app2](imagens/app3.jpeg)
+![app1](imagens/home.jpeg)
