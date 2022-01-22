@@ -19,6 +19,6 @@ O objetivo deste trabalho é consolidar o conhecimento dos alunos sobre invocaç
 
 # Links
 
-# slide
+Apresentação e slides encontram-se no link abaixo (Somente dominio da UFC)
 
-# video
+link = https://drive.google.com/drive/folders/1TAdmkSO57esqOOoQfmYnITyGbhgJTz5E?usp=sharing
