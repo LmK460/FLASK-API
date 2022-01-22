@@ -1,4 +1,5 @@
 # RabbiMQ e GPRC
+
 # Equipe 16
 
 
@@ -22,9 +23,9 @@ O HomeAssistent também deverá se comportar como um servidor para uma aplicaç�
 
 # Arquitetura
 
-![arquitetura do projeto](imagens/arquitetura.jpeg)
+![arquitetura do projeto](imagens/arquitetura.png)
 
-#Aplicação
+# Aplicação
 ![app1](images/app2.jpeg)
 ![app2](images/app3.jpeg)
 ![app1](images/home.jpeg)
