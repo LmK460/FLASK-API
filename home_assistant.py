@@ -31,97 +31,9 @@ stub_water_can = watering_can_pb2_grpc.WateringCanStub(channelWC)
 
 
 last_measures = [1,2,3]
-
-
-
-
-
-#def callrequests(ch, method, properties, body):
-
-
-
-
-#Rotas de comunicações
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/temperatura', methods=['GET'])
-def Temperature():
-
-    result = last_measures['temp']
-    print(result)
-    
-    return jsonify(result)
-
-
-@app.route('/humidade', methods=['GET'])
-def Humidity():
-
-    result = last_measures['hum']
-    print(result)
-    
-    return jsonify(result)
-
-@app.route('/luz', methods=['GET'])
-def Luz():
-
-    result = last_measures['light']
-    
-    return jsonify('A luz encontra-se desligada')
-
-@app.route('/ligarlampada', methods=['POST'])
-def LigarLampada():
-
-    stub_lamp.setState(1)
-    result  = stub_lamp.getState
-    return jsonify('Lampada Ligada')
-
-@app.route('/desligarlampada', methods=['POST'])
-def DesligarLampada():
-
-    stub_aircond.setState(0)
-    result  = stub_lamp.getState
-    return jsonify('Lampada Desligada')
-
-
-@app.route('/ligarArcondicionado', methods=['POST'])
-def LigarArcondicionado():
-
-    stub_aircond.setState(1)
-    result  = stub_aircond.getState
-    return jsonify(result)
-
-@app.route('/desligarArcondicionado', methods=['POST'])
-def DesligarArcondicionado():
-
-    stub_aircond.setState(0)
-    result  = stub_aircond.getState
-    return jsonify(result)
-
-@app.route('/ligarRegador', methods=['POST'])
-def LigarRegador():
-
-    stub_water_can.setState(1)
-    result  = stub_water_can.getState
-    return jsonify(result)
-
-
-@app.route('/desligarRegador', methods=['POST'])
-def DesligarRegador():
-
-    stub_water_can.setState(0)
-    result  = stub_water_can.getState
-    return jsonify(result)
-
-#fim das rotas
-
-
-
+#0 - Temperatura
+#1 - Luminosidade
+#2 - Humidade
 
 def callback_temp(ch, method, properties, body):
     message = measure_pb2.Measure()
@@ -134,7 +46,6 @@ def callback_temp(ch, method, properties, body):
     airCondState = AirCondState()
     airCondState.state = AirCondState.STRONG
     stub_aircond.setState(airCondState)'''
-
 
     ''' airCondState = AirCondState()
     if value<25: airCondState.state = AirCondState.WEAK
@@ -235,8 +146,6 @@ def on_request(ch, method, props, body):
 
 
 def main():
-
-    app.run(host = '0.0.0.0',port=8080, debug=True)
 
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host='localhost'))
