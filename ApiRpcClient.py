@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 from base64 import decode
 from turtle import Turtle
-from typing import Dict
 import pika, random, sys, os, traceback, time
 import uuid
 
-import measure_pb2
 
-class ApiRpcClientPost:
-    def __init__(self, name,estado) -> None:
-        self.name = name
-        self.state = estado
+class ApiRpcClient:
+    def __init__(self, type) -> None:
+        self.type = type
         self.connection = pika.BlockingConnection(
             pika.ConnectionParameters(host='localhost'))
         self.channel = self.connection.channel()
@@ -31,17 +28,16 @@ class ApiRpcClientPost:
     def call(self):
         self.response = None
         self.corr_id = str(uuid.uuid4())
-        message = []
-        message.append(self.name)
-        message.append(self.state)
+        message = self.type
+        print(self.type)
         self.channel.basic_publish(
             exchange='measures',
-            routing_key='rpc-p',
+            routing_key='rpc',
             properties=pika.BasicProperties(
                 reply_to=self.callback_queue,
                 correlation_id=self.corr_id,
             ),
-            body=str(message) )
+            body=(message) )
         while self.response is None:
             self.connection.process_data_events()
         self.channel.queue_delete(queue='rpc')

@@ -1,9 +1,8 @@
 from urllib import response
 from fastapi import APIRouter
 #from home_assistant import home_assistant
-from client_copy import ApiRpcClient
-from client import ApiRpcClientPost
-from measurer import Measurer
+from ApiRpcClient import ApiRpcClient
+from ApiRpcClientPost import ApiRpcClientPost
 from Models.Estado_model import Model
 router = APIRouter()
 

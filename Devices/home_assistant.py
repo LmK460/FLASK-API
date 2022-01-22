@@ -7,12 +7,6 @@ from urllib import response
 from flask import jsonify
 import pika, sys, os, traceback, grpc
 
-from flask import Flask, jsonify
-from flask import render_template
-from flask import request
-import socket
-
-import json
 
 import measure_pb2
 from air_cond_pb2 import AirCondState
@@ -41,10 +35,6 @@ def callback_temp(ch, method, properties, body):
     print('value:{}'.format(value))
     last_measures[0] = value
     print('temp:{}'.format(last_measures[0]))
-    '''
-    airCondState = AirCondState()
-    airCondState.state = AirCondState.STRONG
-    stub_aircond.setState(airCondState)'''
 
 
     ''' airCondState = AirCondState()
@@ -77,6 +67,7 @@ def callback_hum(ch, method, properties, body):
     value = message.value
     last_measures[2] = value
     print('hum:{}'.format(last_measures[2]))
+
     '''wateringCanState = WateringCanState()
     if value<55:
         wateringCanState.state = WateringCanState.ON
