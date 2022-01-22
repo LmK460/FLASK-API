@@ -31,9 +31,8 @@ stub_water_can = watering_can_pb2_grpc.WateringCanStub(channelWC)
 
 
 last_measures = [1,2,3]
-#0 - Temperatura
-#1 - Luminosidade
-#2 - Humidade
+
+
 
 def callback_temp(ch, method, properties, body):
     message = measure_pb2.Measure()
@@ -46,6 +45,7 @@ def callback_temp(ch, method, properties, body):
     airCondState = AirCondState()
     airCondState.state = AirCondState.STRONG
     stub_aircond.setState(airCondState)'''
+
 
     ''' airCondState = AirCondState()
     if value<25: airCondState.state = AirCondState.WEAK
@@ -134,8 +134,16 @@ def on_request(ch, method, props, body):
         response = last_measures[1]
     elif(aux=='light'):
         response = last_measures[2]
-
-    else: response = last_measures[0]
+    elif(aux=='Air'):
+        airCondState = AirCondState()
+        response = stub_aircond.getState(airCondState)
+    elif(aux=='Lamp'):
+        lampState = LampState()
+        response = stub_lamp.getState(lampState)
+    elif(aux=='Wat'):
+        wateringcanState = WateringCanState()
+        response = stub_water_can.getState(wateringcanState)
+    else: response = 'Valor invalido'
     ch.basic_publish(exchange='',
                      routing_key='rpc',
                      properties=pika.BasicProperties(correlation_id = \
