@@ -122,9 +122,9 @@ def on_request(ch, method, props, body):
     if(aux == 'temp'):
         response = last_measures[0]
     elif(aux=='hum'):
-        response = last_measures[1]
-    elif(aux=='light'):
         response = last_measures[2]
+    elif(aux=='light'):
+        response = last_measures[1]
     elif(aux=='Air'):
         airCondState = AirCondState()
         response = stub_aircond.getState(airCondState)
